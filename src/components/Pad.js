@@ -1,28 +1,47 @@
 import React from "react"
 
 export default function App() {
+  const [contact, setContact] = React.useState({
+    firstName: "John",
+    lastName: "Doe",
+    phone: "+1 (719) 555-1212",
+    email: "itsmyrealname@example.com",
+    isFavorite: false
+  })
   /**
-   * Challenge: 
-   * See if you can think of a way to add 1 to the count
-   * every time the + button is clicked
+   * Challenge: Use a ternary to determine which star image filename
+   * should be used based on the `contact.isFavorite` property
+   * 
+   * `true` => "star-filled.png"
+   * `false` => "star-empty.png"
+   * 
+   * Then use the starIcon value to display the correct image
    */
-  const [count, setCount] = React.useState(0)
 
-  function add() {
-    setCount(count + 1)
-  }
+  let starIcon = isFavorite ? `../images/star-filled.png` : `../images/star-empty.png`
 
-  function minus() {
-    setCount(count - 1)
+  function toggleFavorite() {
+    console.log("Toggle Favorite")
   }
 
   return (
-    <div className="counter">
-      <button className="counter--minus" onClick={minus}>–</button>
-      <div className="counter--count">
-        <h1>{count}</h1>
-      </div>
-      <button className="counter--plus" onClick={add}>+</button>
-    </div>
+    <main>
+      <article className="card">
+        <img src="./images/user.png" className="card--image" />
+        <div className="card--info">
+          <img
+            src={starIcon}
+            className="card--favorite"
+            onClick={toggleFavorite}
+          />
+          <h2 className="card--name">
+            {contact.firstName} {contact.lastName}
+          </h2>
+          <p className="card--contact">{contact.phone}</p>
+          <p className="card--contact">{contact.email}</p>
+        </div>
+
+      </article>
+    </main>
   )
 }
