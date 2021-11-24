@@ -1,47 +1,32 @@
 import React from "react"
 
-export default function App() {
-  const [contact, setContact] = React.useState({
-    firstName: "John",
-    lastName: "Doe",
-    phone: "+1 (719) 555-1212",
-    email: "itsmyrealname@example.com",
-    isFavorite: false
-  })
-  /**
-   * Challenge: Use a ternary to determine which star image filename
-   * should be used based on the `contact.isFavorite` property
-   * 
-   * `true` => "star-filled.png"
-   * `false` => "star-empty.png"
-   * 
-   * Then use the starIcon value to display the correct image
-   */
+export default function Form() {
+  const [person, setPerson] = React.useState({ firstName: "", lastName: "" })
 
-  let starIcon = isFavorite ? `../images/star-filled.png` : `../images/star-empty.png`
-
-  function toggleFavorite() {
-    console.log("Toggle Favorite")
+  function handleChange(event) {
+    setPerson(prevState => {
+      return (
+        {
+          firstName: event.target.value,
+          lastName: event.target.value
+        }
+      )
+    })
+    console.log(person);
   }
 
   return (
-    <main>
-      <article className="card">
-        <img src="./images/user.png" className="card--image" />
-        <div className="card--info">
-          <img
-            src={starIcon}
-            className="card--favorite"
-            onClick={toggleFavorite}
-          />
-          <h2 className="card--name">
-            {contact.firstName} {contact.lastName}
-          </h2>
-          <p className="card--contact">{contact.phone}</p>
-          <p className="card--contact">{contact.email}</p>
-        </div>
-
-      </article>
-    </main>
+    <form>
+      <input
+        type="text"
+        placeholder="First Name"
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        placeholder="Last Name"
+        onChange={handleChange}
+      />
+    </form>
   )
 }
